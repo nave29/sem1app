@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HEALTHCARE APPLICATION</title>
+<style>
+table{
+    border: 1px solid black;
+}
+th, td{
+    border: 1px solid black;
+}
+
+</style>
+</head>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+
+<body style="background-color:#ffffff;">
+<div data-role="page" id="pageone" class="page1" style="background-color:#000000;">
+<center>
+<img src="img/logo.png" width="50%">
+<script type = "text/javascript">
+
+// Note: Like all Javascript password scripts, this is hopelessly insecure as the user can see 
+//the valid usernames/passwords and the redirect url simply with View Source.  
+// And the user can obtain another three tries simply by refreshing the page.  
+//So do not use for anything serious!
+
+var count = 5;
+function validate() {
+var un = document.myform.username.value;
+var pw = document.myform.pword.value;
+var valid = false;
+var val2 = false;
+i = 1;
+
+var unArray = ["admin"];  // as many as you like - no comma after final entry
+var pwArray = ["adminpass"];  // the corresponding passwords;
+var patient = ["patient"];
+var patientpass = ["patientpass"];
+for (var i=0; i <unArray.length; i++) {
+if ((un == unArray[i]) && (pw == pwArray[i])) {
+valid = true;
+break;
+}
+
+if ((un == patient[i]) && (pw == patientpass[i])) {
+val2 = true;
+break;
+}
+}
+
+if (val2) {
+alert ("Login was successful");
+window.location = "#patient";
+return false;
+}
+
+if (valid) {
+alert ("Login was successful");
+window.location = "#pagetwo";
+return false;
+}
+
+var t = " tries";
+if (count == 1) {t = " try"}
+
+if (count >= 1) {
+alert ("Invalid username and/or password.  You have " + count + t + " left.");
+document.myform.username.value = "";
+document.myform.pword.value = "";
+setTimeout("document.myform.username.focus()", 25);
+setTimeout("document.myform.username.select()", 25);
+count --;
+}
+
+else {
+alert ("Still incorrect! You have no more tries left!");
+document.myform.username.value = "No more tries allowed!";
+document.myform.pword.value = "";
+document.myform.username.disabled = true;
+document.myform.pword.disabled = true;
+return false;
+}
+
+}
+
+</script>
+
+<form name = "myform">
+<p>ENTER USER NAME <input type="text" name="username"> ENTER PASSWORD <input type="password" name="pword">
+<input type="button" value="Check In" name="Submit" onclick= "validate()">
+</p>
+</form>
+<span style="font-size:13px; color:#ffffff; letter-spacing:2px;">
+ADMIN:<br>
+username: admin<br>
+password: adminpass<br><br>
+PATIENT:<br>
+username: patient<br>
+password: patientpass<br><br>
+</span>
+</center>
+</div>
+
+
+<div data-role="page" id="patient" style="background-color:#000000;">
+<center>
+<br><br><br><br><br>
+<a href="#schedule" data-transition="slide"><img src="img/schedule.png"></a><br><br>
+</center>
+</div>
+
+
+<div data-role="page" id="pagetwo" style="background-color:#000000;">
+<br>
+<br><br>
+<br><br>
+<center>
+<font color="white" size="9">
+YOUR APPOINTMENTS:
+</font>
+<table style="background-color:#FFFFFF; width:40%">
+  <tr>
+	<th>STATUS</th>
+	<th>DATE</th>
+    <th>TIME</th>
+    <th>PATIENT</th>
+  </tr>
+  <tr>
+	<td><input type="checkbox"><p style="text-align:right; margin-bottom:-5px; margin-top:-5px;">DONE</p></td>
+    <td>11/12/14</td>
+    <td>8:00am</td>
+	<td>Llorente, Joel Louie</td>
+  </tr>
+  <tr>
+ <td><input type="checkbox"><p style="text-align:right; margin-bottom:-5px; margin-top:-5px;">DONE</p></td>
+    <td>11/12/14</td>
+    <td>10:00am</td>
+	<td>Isip, Daisy</td>
+  </tr>
+  <tr>
+ <td><input type="checkbox"><p style="text-align:right; margin-bottom:-5px; margin-top:-5px;">DONE</p></td>
+    <td>11/13/14</td>
+    <td>1:00pm</td>
+	<td>Garcia, Jason Matthew</td>
+  </tr>
+  <tr>
+<td><input type="checkbox"><p style="text-align:right; margin-bottom:-5px; margin-top:-5px;">DONE</p></td>
+    <td>11/13/14</td>
+    <td>3:00pm</td>
+	<td>Duka, Justin</td>
+  </tr>
+   <tr>
+  <td><input type="checkbox"><p style="text-align:right; margin-bottom:-5px; margin-top:-5px;">DONE</p></td>
+    <td>11/14/14</td>
+    <td>9:00pm</td>
+	<td>Canlas, Oliver</td>
+  </tr>
+</table>
+<button>Approve</button>
+<button href="#pageone">Log out</button>
+</center>
+</div>
+
+<div data-role="page" id="schedule" style="background-color:#000000;">
+
+<br>
+<br><br>
+<br><br>
+<form name="hop" action="" method="post">
+<p align="center">
+<select name="doctor">
+<option selected>Choose Doctor:</option>
+<option value="Gica">Dr. Gica, Elia - Surgeon</option>
+<option value="Garcia">Dr. Garcia, Jason - Physician</option>
+<option value="Llorente">Dr. Llorente, Jolobee - Psychologist</option>
+<option value="Hicban">Dr. Hicban, Daniel - Ob-Gyne</option>
+
+
+</select>
+
+<select name="time">
+<option selected>Choose a time slot:</option>
+<option value="one">8am - 9am</option>
+<option value="two">10am - 11am</option>
+<option value="three">11am - 12pm</option>
+<option value="four">12pm - 1pm</option>
+<option value="five">1pm - 2pm</option>
+<option value="six">2pm - 3pm</option>
+<option value="seven">3pm - 4pm</option>
+<option value="eight">4pm - 5pm</option>
+</select>
+</form>
+<center>
+
+<a href="#results" data-transition="slide"> 
+<img src="img/submit.png" width="40%">
+</a>
+</center>
+</div>
+
+<div data-role="page" id="results" style="background-color:#000000;">
+<center>
+<font size="24px" color="#FFFFFF">
+<br>
+<br>
+Thank you!<br>
+You have scheduled an appointment!<br><br><br>
+
+You will be reminded via email
+<button href ="#schedule">Back to home</button>
+</font>
+</center>
+</div>
+
+</body>
+</html>
